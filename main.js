@@ -18,9 +18,7 @@ document.querySelector('#app').innerHTML = `
     </div>
   </nav>
 
-  <section id="section">
-
-  </section>
+  <section id="section"></section>
 `
 
 const main = document.getElementById('section')
@@ -33,38 +31,24 @@ const returnMovies = async (url) => {
     const data = await res.json()
     console.log(data.results)
 
-    data.results.forEach((element) => {
-      const divCard = document.createElement('div')
-      divCard.setAttribute('class', 'card')
+    const movies = data.results
 
-      const divRow = document.createElement('div')
-      divRow.setAttribute('class', 'row')
-
-      const divColumn = document.createElement('div')
-      divColumn.setAttribute('class', 'column')
-
-      const image = document.createElement('img')
-      image.setAttribute('class', 'thumbnail')
-      image.setAttribute('id', 'image')
-
-      const title = document.createElement('h3')
-      title.setAttribute('id', 'title')
-
-      title.innerHTML = `${element.title}`
-      image.src = imgPath + element.poster_path
-
-      divCard.appendChild(image)
-      divCard.appendChild(title)
-      divColumn.appendChild(divCard)
-      divRow.appendChild(divColumn)
-
-      main.appendChild(divRow)
-    })
+    return (main.innerHTML = movies.map((item) => {
+      return `
+          <div class="column">
+            <div class="card">
+              <img src=${
+                imgPath + item.poster_path
+              } class="thumbnail" id="image" />
+              <h3 id="title">${item.title}</h3>
+            </div>
+          </div>
+      `
+    }))
   } catch (error) {
     console.log(error)
   }
 }
-
 returnMovies(apiKey)
 
 form.addEventListener('submit', (e) => {
