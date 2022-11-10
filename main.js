@@ -35,16 +35,14 @@ const returnMovies = async (url) => {
 
     return (main.innerHTML = movies.map((item) => {
       return `
-          <div class="column">
-            <div class="card">
-              <img src=${
-                imgPath + item.poster_path
-              } class="thumbnail" id="image" />
-              <h3 id="title">${item.title}</h3>
-            </div>
+          <div class="card">
+            <img src=${
+              imgPath + item.poster_path
+            } class="thumbnail" id="image" />
+            <h3 id="title">${item.title}</h3>
           </div>
       `
-    }))
+    }).join(''))
   } catch (error) {
     console.log(error)
   }
