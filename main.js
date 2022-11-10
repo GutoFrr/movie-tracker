@@ -1,4 +1,27 @@
-import { IMG_PATH, SEARCH_KEY, API_LINK } from './secrets.js'
+import './style.css'
+const apiKey = import.meta.env.VITE_API_KEY
+const imgPath = import.meta.env.VITE_IMG_PATH
+const searchKey = import.meta.env.VITE_SEARCH_KEY
+
+document.querySelector('#app').innerHTML = `
+  <nav class="navbar">
+    <a class="logo" href="#">Movie Finder</a>
+    <div class="search-container">
+      <form role="search" id="form">
+        <input
+          type="search"
+          name="query"
+          id="query"
+          placeholder="Search..."
+        />
+      </form>
+    </div>
+  </nav>
+
+  <section id="section">
+
+  </section>
+`
 
 const main = document.getElementById('section')
 const form = document.getElementById('form')
@@ -28,7 +51,7 @@ const returnMovies = async (url) => {
       title.setAttribute('id', 'title')
 
       title.innerHTML = `${element.title}`
-      image.src = IMG_PATH + element.poster_path
+      image.src = imgPath + element.poster_path
 
       divCard.appendChild(image)
       divCard.appendChild(title)
@@ -41,7 +64,8 @@ const returnMovies = async (url) => {
     console.log(error)
   }
 }
-returnMovies(API_LINK)
+
+returnMovies(apiKey)
 
 form.addEventListener('submit', (e) => {
   e.preventDefault()
@@ -50,7 +74,7 @@ form.addEventListener('submit', (e) => {
   const searchItem = search.value
 
   if (searchItem) {
-    returnMovies(SEARCH_KEY + searchItem)
+    returnMovies(searchKey + searchItem)
     search.value = ''
   }
 })
