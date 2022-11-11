@@ -1,20 +1,20 @@
-const getReviews = (req, res) => {
+const getReviews = async (req, res) => {
   res.send('Get reviews')
 }
 
-const createReview = (req, res) => {
+const createReview = async (req, res) => {
   res.send('Create review')
 }
 
-const getSingleReview = (req, res) => {
+const getSingleReview = async (req, res) => {
   res.send('Get single review')
 }
 
-const updateReview = (req, res) => {
+const updateReview = async (req, res) => {
   res.send('Update review')
 }
 
-const deleteReview = (req, res) => {
+const deleteReview = async (req, res) => {
   res.send('Delete review')
 }
 
