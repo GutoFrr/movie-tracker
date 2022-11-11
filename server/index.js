@@ -1,6 +1,6 @@
 import app from './server.js'
 import mongodb from 'mongodb'
-import { injectDB } from './dao/reviewsDAO.js'
+import { injectDBDAO } from './dao/reviewsDAO.js'
 
 import dotenv from 'dotenv'
 dotenv.config()
@@ -20,7 +20,7 @@ MongoClient.connect(url, {
   })
   .then((client) => {
     app.listen(port, async () => {
-      await injectDB(client)
+      await injectDBDAO(client)
       console.log(`Server listening on port ${port}...`)
     })
   })

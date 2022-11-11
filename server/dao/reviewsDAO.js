@@ -3,7 +3,7 @@ const ObjectId = mongodb.ObjectId
 
 let reviews
 
-const injectDB = async (conn) => {
+const injectDBDAO = async (conn) => {
   if (reviews) {
     return
   }
@@ -15,7 +15,7 @@ const injectDB = async (conn) => {
   }
 }
 
-const createReview = async (movieId, user, review) => {
+const addReviewDAO = async (movieId, user, review) => {
   try {
     const reviewDoc = {
       movieId: movieId,
@@ -30,7 +30,7 @@ const createReview = async (movieId, user, review) => {
   }
 }
 
-const getReview = async (reviewId) => {
+const getReviewDAO = async (reviewId) => {
   try {
     return await reviews.findOne({ _id: ObjectId(reviewId) })
   } catch (error) {
@@ -39,7 +39,7 @@ const getReview = async (reviewId) => {
   }
 }
 
-const updateReview = async (reviewId, user, review) => {
+const updateReviewDAO = async (reviewId, user, review) => {
   try {
     const updateResponse = await reviews.updateOne(
       { _id: ObjectId(reviewId) },
@@ -53,7 +53,7 @@ const updateReview = async (reviewId, user, review) => {
   }
 }
 
-const deleteReview = async (reviewId) => {
+const deleteReviewDAO = async (reviewId) => {
   try {
     const deleteResponse = await reviews.deleteOne({ _id: ObjectId(reviewId) })
 
@@ -64,7 +64,7 @@ const deleteReview = async (reviewId) => {
   }
 }
 
-const getReviewsByMovieId = async (movieId) => {
+const getReviewsByMovieIdDAO = async (movieId) => {
   try {
     const cursor = await reviews.find({ movieId: parseInt(movieId) })
     return cursor.toArray()
@@ -74,4 +74,11 @@ const getReviewsByMovieId = async (movieId) => {
   }
 }
 
-export { injectDB, createReview, getReview, updateReview, deleteReview }
+export {
+  injectDBDAO,
+  addReviewDAO,
+  getReviewDAO,
+  updateReviewDAO,
+  deleteReviewDAO,
+  getReviewsByMovieIdDAO,
+}
