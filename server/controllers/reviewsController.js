@@ -26,13 +26,14 @@ const getReviews = async (req, res) => {
 const createReview = async (req, res) => {
   try {
     const movieId = parseInt(req.body.movieId)
-    const review = req.body.review
     const user = req.body.user
+    const review = req.body.review
 
-    const reviewResponse = await addReviewDAO(movieId, user, review)
-    res.json({ status: 'success' })
+    res.json({ movieId, user, review })
+    return await addReviewDAO(movieId, user, review)
   } catch (error) {
     res.status(500).json({ error: error.message })
+    console.log(error)
   }
 }
 
