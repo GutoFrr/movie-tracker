@@ -10,10 +10,7 @@ const MongoClient = mongodb.MongoClient
 const url = process.env.MONGO_URL
 const port = process.env.PORT || 5000
 
-MongoClient.connect(url, {
-  maxPoolSize: 50,
-  writeConcern: 2500,
-})
+MongoClient.connect(url)
   .catch((err) => {
     console.error(err)
     process.exit(1)
