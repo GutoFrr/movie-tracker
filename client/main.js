@@ -33,16 +33,23 @@ const returnMovies = async (url) => {
 
     const movies = data.results
 
-    return (main.innerHTML = movies.map((item) => {
-      return `
+    return (main.innerHTML = movies
+      .map((item) => {
+        return `
           <div class="card">
             <img src=${
               imgPath + item.poster_path
             } class="thumbnail" id="image" />
-            <h3 id="title">${item.title}</h3>
+            <h3 id="title">${item.title}
+              <br>
+              <a href="movie.html?id=${item.id}&title=${item.title}">
+                Check reviews
+              </a>
+            </h3>
           </div>
       `
-    }).join(''))
+      })
+      .join(''))
   } catch (error) {
     console.log(error)
   }
