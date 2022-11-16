@@ -1,4 +1,3 @@
-import './style.css'
 const url = new URL(location.href)
 const movieId = url.searchParams.get('id')
 const movieTitle = url.searchParams.get('title')
@@ -14,32 +13,37 @@ document.querySelector('#app').innerHTML = `
           type="search"
           name="query"
           id="query"
+          required
           placeholder="Search..."
         />
       </form>
     </div>
   </nav>
 
-  <div class="column">
-    <div class="card">
-        New Review
-        <p><strong>Review: </strong>
-          <input type="text" id="new_review" value="">
-        </p>
-        <p><strong>User: </strong>
-          <input type="text" id="new_user" value="">
-        </p>
-        <p><a href="#" onclick="createReview('new_review', 'new_user')">💾</a>
-        </p>
-    </div>
+
+  <div class="title">
+    <h1>Reviews for:</h1>
+    <h3 id="title"></h3>
   </div>
 
-  <section id="section"></section>
+  <div class="card">
+    New Review
+    <strong>Review: </strong>
+    <input type="text" id="new_review" value="" class="movie-input" />
+    <strong>User: </strong>
+    <input type="text" id="new_user" value="" class="movie-input" />
+    <button type="button" onclick="createReview('new_review', 'new_user')">
+      Submit
+    </button>
+  </div>
+
+  <section id="movie-section"></section>
 `
 
-const main = document.getElementById('section')
+const main = document.getElementById('movie-section')
+const title = document.getElementById('title')
 
-getReviews(apiUrl)
+title.textContent = movieTitle
 
 const getReviews = async (url) => {
   try {
@@ -73,6 +77,8 @@ const getReviews = async (url) => {
     console.log(error)
   }
 }
+
+getReviews(apiUrl)
 
 const createReview = async (reviewInputId, userInputId, id = '') => {
   const review = document.getElementById(reviewInputId).value
@@ -116,3 +122,5 @@ const createReview = async (reviewInputId, userInputId, id = '') => {
     }
   }
 }
+
+const editReview = async () => console.log('aaaa')

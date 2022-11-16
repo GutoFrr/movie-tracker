@@ -1,4 +1,3 @@
-import './style.css'
 const apiKey = import.meta.env.VITE_API_KEY
 const imgPath = import.meta.env.VITE_IMG_PATH
 const searchKey = import.meta.env.VITE_SEARCH_KEY
@@ -12,6 +11,7 @@ document.querySelector('#app').innerHTML = `
           type="search"
           name="query"
           id="query"
+          required
           placeholder="Search..."
         />
       </form>
