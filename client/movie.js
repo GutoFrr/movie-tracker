@@ -64,7 +64,7 @@ const getReviews = async (url) => {
             </p>
             <p>
               <button class="edit-btn" onclick="editReview('${review._id}','${review.review}', '${review.user}')">Edit</button>
-              <button class="delete-btn" type="button" onclick="deleteReview('${review._id}')">Delete</button>
+              <button class="delete-btn" type="button" onclick="deleteReview('/${review._id}')">Delete</button>
             </p>
           </div>
       `
@@ -121,3 +121,18 @@ const createReview = async (reviewInputId, userInputId, id = '') => {
 }
 
 const editReview = async () => console.log('aaaa')
+
+const deleteReview = async (id) => {
+  try {
+    const res = await fetch(apiUrl + id, {
+      method: 'DELETE',
+    })
+
+    const data = await res.json()
+    console.log(data)
+
+    location.reload()
+  } catch (error) {
+    console.log(error)
+  }
+}
