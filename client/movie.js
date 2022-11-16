@@ -8,11 +8,12 @@ document.querySelector('#app').innerHTML = `
   <nav class="navbar">
     <a class="logo" href="index.html">Movie Finder</a>
     <div class="search-container">
-      <form role="search" id="form">
+      <form class="search-form" role="search" id="form">
         <input
           type="search"
           name="query"
           id="query"
+          class="search"
           required
           placeholder="Search..."
         />
@@ -26,18 +27,18 @@ document.querySelector('#app').innerHTML = `
     <h3 id="title"></h3>
   </div>
 
-  <div class="card">
+  <section id="movie-section"></section>
+
+  <form onsubmit="createReview('new_review', 'new_user')" class="movie-form">
     New Review
     <strong>Review: </strong>
-    <input type="text" id="new_review" value="" class="movie-input" />
+    <input type="text" id="new_review" value="" class="movie-input" required />
     <strong>User: </strong>
-    <input type="text" id="new_user" value="" class="movie-input" />
-    <button type="button" onclick="createReview('new_review', 'new_user')">
+    <input type="text" id="new_user" value="" class="movie-input" required />
+    <button class="submit" type="submit">
       Submit
     </button>
-  </div>
-
-  <section id="movie-section"></section>
+  </form>
 `
 
 const main = document.getElementById('movie-section')
@@ -54,22 +55,18 @@ const getReviews = async (url) => {
     return (main.innerHTML = data
       .map((review) => {
         return `
-        <div class="row">
-          <div class="column">
-          <div class="card" id="${review._id}">
-              <p>
-                <strong>Review: </strong>${review.review}
-              </p>
-              <p>
-                <strong>User: </strong>${review.user}
-              </p>
-              <p>
-                <a href="#" onclick="editReview('${review._id}','${review.review}', '${review.user}')">✏️</a>
-                <a href="#" onclick="deleteReview('${review._id}')">🗑</a>
-              </p>
-            </div>
+          <div class="review-card" id="${review._id}">
+            <p>
+              <strong>Review: </strong>${review.review}
+            </p>
+            <p>
+              <strong>User: </strong>${review.user}
+            </p>
+            <p>
+              <button class="edit-btn" onclick="editReview('${review._id}','${review.review}', '${review.user}')">Edit</button>
+              <button class="delete-btn" type="button" onclick="deleteReview('${review._id}')">Delete</button>
+            </p>
           </div>
-        </div>
       `
       })
       .join(''))
