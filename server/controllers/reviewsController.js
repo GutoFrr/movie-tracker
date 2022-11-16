@@ -71,9 +71,9 @@ const updateReview = async (req, res) => {
       throw new Error('Unable to update review')
     }
 
-    res.json({ status: 'success' })
+    res.json({ status: 'Success' })
   } catch (error) {
-    res.status(500).json({ error: e.message })
+    res.status(500).json({ error: error.message })
   }
 }
 
@@ -84,7 +84,7 @@ const deleteReview = async (req, res) => {
 
     res.json({ status: 'success' })
   } catch (error) {
-    res.status(500).json({ error: e.message })
+    res.status(500).json({ error: error.message })
   }
 }
 

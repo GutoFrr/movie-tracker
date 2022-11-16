@@ -2,6 +2,8 @@
 import express from 'express'
 const app = express()
 
+import 'express-async-errors'
+
 // packages
 import cors from 'cors'
 

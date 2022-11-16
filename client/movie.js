@@ -31,10 +31,14 @@ document.querySelector('#app').innerHTML = `
 
   <form onsubmit="createReview('new_review', 'new_user')" class="movie-form">
     New Review
-    <strong>Review: </strong>
-    <input type="text" id="new_review" value="" class="movie-input" required />
-    <strong>User: </strong>
-    <input type="text" id="new_user" value="" class="movie-input" required />
+    <div class="form-row">
+      <label for="review">Review: </label>
+      <input type="text" name="review" id="new_review" value="" class="movie-input" required />
+    </div>
+    <div class="form-row>
+      <label for="user">User: </label>
+      <input type="text" name="user" id="new_user" value="" class="movie-input" required />
+    </div>
     <button class="submit" type="submit">
       Submit
     </button>
@@ -62,10 +66,14 @@ const getReviews = async (url) => {
             <p>
               <strong>User: </strong>${review.user}
             </p>
-            <p>
-              <button class="edit-btn" onclick="editReview('${review._id}','${review.review}', '${review.user}')">Edit</button>
-              <button class="delete-btn" type="button" onclick="deleteReview('/${review._id}')">Delete</button>
-            </p>
+            <div class="review-btns">
+              <button class="edit-btn" type="button" onclick="editReview('${review._id}', '${review.review}', '${review.user}')">
+                Edit
+              </button>
+              <button class="delete-btn" type="button" onclick="deleteReview('/${review._id}')">
+                Delete
+              </button>
+            </div>
           </div>
       `
       })
@@ -83,7 +91,7 @@ const createReview = async (reviewInputId, userInputId, id = '') => {
 
   if (id) {
     try {
-      const res = await fetch(apiUrl + id, {
+      const res = await fetch(apiUrl + '/' + id, {
         method: 'PUT',
         headers: {
           Accept: 'application/json, text/plain, */*',
@@ -120,7 +128,28 @@ const createReview = async (reviewInputId, userInputId, id = '') => {
   }
 }
 
-const editReview = async () => console.log('aaaa')
+const editReview = async (id, review, user) => {
+  const element = document.getElementById(id)
+  const reviewInputId = 'review' + id
+  const userInputId = 'user' + id
+
+  element.innerHTML = `
+  <div class="movie-form">
+    Edit Review
+    <div class="form-row">
+      <label for="review">Review: </label>
+      <input type="text" name="review" id="${reviewInputId}" value="${review}" class="movie-input" />
+    </div>
+    <div class="form-row>
+      <label for="user">User: </label>
+      <input type="text" name="user" id="${userInputId}" value="${user}" class="movie-input" />
+    </div>
+    <button class="submit" type="button" onclick="createReview('${reviewInputId}', '${userInputId}', '${id}')">
+      Save
+    </button>
+  </div>
+  `
+}
 
 const deleteReview = async (id) => {
   try {
