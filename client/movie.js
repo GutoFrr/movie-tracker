@@ -35,7 +35,7 @@ document.querySelector('#app').innerHTML = `
       <label for="review">Review: </label>
       <input type="text" name="review" id="new_review" value="" class="movie-input" required />
     </div>
-    <div class="form-row>
+    <div class="form-row">
       <label for="user">User: </label>
       <input type="text" name="user" id="new_user" value="" class="movie-input" required />
     </div>
@@ -134,7 +134,7 @@ const editReview = async (id, review, user) => {
   const userInputId = 'user' + id
 
   element.innerHTML = `
-  <div class="movie-form">
+  <div class="edit-form">
     Edit Review
     <div class="form-row">
       <label for="review">Review: </label>
