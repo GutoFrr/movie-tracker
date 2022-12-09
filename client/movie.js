@@ -6,7 +6,7 @@ const apiUrl = 'http://localhost:5000/api/reviews'
 
 document.querySelector('#app').innerHTML = `
   <nav class="navbar">
-    <a class="logo" href="index.html">Movie Finder</a>
+    <a class="logo" href="index.html">Movie Tracker</a>
     <div class="search-container">
       <form class="search-form" role="search" id="form">
         <input

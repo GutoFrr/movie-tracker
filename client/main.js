@@ -4,7 +4,7 @@ const searchKey = import.meta.env.VITE_SEARCH_KEY
 
 document.querySelector('#app').innerHTML = `
   <nav class="navbar">
-    <a class="logo" href="index.html">Movie Finder</a>
+    <a class="logo" href="index.html">Movie Tracker</a>
     <div class="search-container">
       <form class="search-form" role="search" id="form">
         <input
