@@ -15,32 +15,31 @@ document.querySelector('#app').innerHTML = `
           id="query"
           class="search"
           required
-          placeholder="Search..."
+          placeholder="Pesquisar..."
         />
       </form>
     </div>
   </nav>
 
-
   <div class="title">
-    <h1>Reviews for:</h1>
-    <h3 id="title"></h3>
+    <h3>Avaliações de:</h3>
+    <h1 id="title"></h1>
   </div>
 
   <section id="movie-section"></section>
 
-  <form onsubmit="createReview('new_review', 'new_user')" class="movie-form">
-    New Review
+  <form class="movie-form">
+    Nova Avaliação
     <div class="form-row">
-      <label for="review">Review: </label>
+      <label for="review">Avaliação: </label>
       <input type="text" name="review" id="new_review" value="" class="movie-input" required />
     </div>
     <div class="form-row">
-      <label for="user">User: </label>
+      <label for="user">Usuário: </label>
       <input type="text" name="user" id="new_user" value="" class="movie-input" required />
     </div>
-    <button class="submit" type="submit">
-      Submit
+    <button class="submit" type="button" onclick="createReview('new_review', 'new_user')">
+      Enviar
     </button>
   </form>
 `
@@ -48,7 +47,7 @@ document.querySelector('#app').innerHTML = `
 const main = document.getElementById('movie-section')
 const title = document.getElementById('title')
 
-title.textContent = movieTitle
+title.innerText = movieTitle
 
 const getReviews = async (url) => {
   try {
@@ -61,28 +60,28 @@ const getReviews = async (url) => {
         return `
           <div class="review-card" id="${review._id}">
             <p>
-              <strong>Review: </strong>${review.review}
+              <strong>Avaliação: </strong>${review.review}
             </p>
             <p>
-              <strong>User: </strong>${review.user}
+              <strong>Usuário: </strong>${review.user}
             </p>
             <div class="review-btns">
               <button class="edit-btn" type="button" onclick="editReview('${review._id}', '${review.review}', '${review.user}')">
-                Edit
+                Editar
               </button>
               <button class="delete-btn" type="button" onclick="deleteReview('/${review._id}')">
-                Delete
+                Deletar
               </button>
             </div>
           </div>
       `
       })
+      .reverse()
       .join(''))
   } catch (error) {
     console.log(error)
   }
 }
-
 getReviews(apiUrl)
 
 const createReview = async (reviewInputId, userInputId, id = '') => {
@@ -135,17 +134,17 @@ const editReview = async (id, review, user) => {
 
   element.innerHTML = `
   <div class="edit-form">
-    Edit Review
+    Editar avaliação
     <div class="form-row">
-      <label for="review">Review: </label>
+      <label for="review">Avaliação: </label>
       <input type="text" name="review" id="${reviewInputId}" value="${review}" class="movie-input" />
     </div>
     <div class="form-row>
-      <label for="user">User: </label>
+      <label for="user">Usuário: </label>
       <input type="text" name="user" id="${userInputId}" value="${user}" class="movie-input" />
     </div>
     <button class="submit" type="button" onclick="createReview('${reviewInputId}', '${userInputId}', '${id}')">
-      Save
+      Salvar
     </button>
   </div>
   `

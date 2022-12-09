@@ -13,7 +13,7 @@ document.querySelector('#app').innerHTML = `
           id="query"
           class="search"
           required
-          placeholder="Search..."
+          placeholder="Pesquisar..."
         />
       </form>
     </div>
@@ -41,12 +41,12 @@ const returnMovies = async (url) => {
             <img src=${
               imgPath + item.poster_path
             } class="thumbnail" id="image" />
-            <h3 id="title">${item.title}
-              <br>
-              <a href="movie.html?id=${item.id}&title=${item.title}">
-                Check reviews
-              </a>
-            </h3>
+            <h3 id="title">${item.title}</h3>
+            <a href="movie.html?id=${item.id}&title=${item.title}">
+              <button type="button" class="check-review-btn">
+                <p>Ver avaliações</p>
+              </button>
+            </a>
           </div>
       `
       })
