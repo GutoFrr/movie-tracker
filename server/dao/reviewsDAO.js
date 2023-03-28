@@ -1,77 +1,79 @@
-import mongodb from 'mongodb'
-const ObjectId = mongodb.ObjectId
+import mongodb from 'mongodb';
+const ObjectId = mongodb.ObjectId;
 
-let reviews
+let reviews;
 
-const injectDBDAO = async (conn) => {
+async function injectDBDAO(conn) {
   if (reviews) {
-    return
+    return;
   }
 
   try {
-    reviews = await conn.db('movie-finder').collection('reviews')
+    reviews = await conn.db('movie-finder').collection('reviews');
   } catch (error) {
-    console.error(`Unable to establish collection handles in userDAO: ${error}`)
+    console.error(
+      `Unable to establish collection handles in userDAO: ${error}`
+    );
   }
 }
 
-const addReviewDAO = async (movieId, user, review) => {
+async function addReviewDAO(movieId, user, review) {
   try {
     const reviewDoc = {
       movieId: movieId,
       user: user,
       review: review,
-    }
+    };
 
-    console.log('adding')
-    return await reviews.insertOne(reviewDoc)
+    console.log('adding');
+    return await reviews.insertOne(reviewDoc);
   } catch (e) {
-    console.error(`Unable to post review: ${e}`)
-    return { error: e }
+    console.error(`Unable to post review: ${e}`);
+    return { error: e };
   }
 }
 
-const getReviewDAO = async (reviewId) => {
+async function getReviewDAO(reviewId) {
   try {
-    return await reviews.findOne({ _id: ObjectId(reviewId) })
+    return await reviews.findOne({ _id: ObjectId(reviewId) });
   } catch (error) {
-    console.error(`Unable to get review: ${error}`)
-    return { error: error }
+    console.error(`Unable to get review: ${error}`);
+    return { error: error };
   }
 }
 
-const updateReviewDAO = async (reviewId, user, review) => {
+async function updateReviewDAO(reviewId, user, review) {
   try {
     const updateResponse = await reviews.updateOne(
       { _id: ObjectId(reviewId) },
       { $set: { user: user, review: review } }
-    )
+    );
 
-    return updateResponse
+    return updateResponse;
   } catch (error) {
-    console.error(`Unable to update review: ${error}`)
-    return { error: error }
+    console.error(`Unable to update review: ${error}`);
+    return { error: error };
   }
 }
 
-const deleteReviewDAO = async (reviewId) => {
+async function deleteReviewDAO(reviewId) {
   try {
-    const deleteResponse = await reviews.deleteOne({ _id: ObjectId(reviewId) })
+    const deleteResponse = await reviews.deleteOne({ _id: ObjectId(reviewId) });
 
-    return deleteResponse
+    return deleteResponse;
   } catch (error) {
-    console.error(`Unable to delete review: ${error}`)
-    return { error: error }
+    console.error(`Unable to delete review: ${error}`);
+    return { error: error };
   }
 }
 
-const getReviewsByMovieIdDAO = async (movieId) => {
+async function getReviewsByMovieIdDAO(movieId) {
   try {
-    const cursor = await reviews.find({ movieId: parseInt(movieId) })
-    return cursor.toArray()
+    const cursor = await reviews.find({ movieId: parseInt(movieId) });
+    return cursor.toArray();
   } catch (error) {
-    console.error(`Unable to get review: ${error}`)
-    return { error: error }
+    console.error(`Unable to get review: ${error}`);
+    return { error: error };
   }
 }
 
@@ -82,4 +84,4 @@ export {
   updateReviewDAO,
   deleteReviewDAO,
   getReviewsByMovieIdDAO,
-}
+};

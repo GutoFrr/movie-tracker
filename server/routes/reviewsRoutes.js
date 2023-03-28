@@ -1,5 +1,5 @@
-import express from 'express'
-const router = express.Router()
+import express from 'express';
+const router = express.Router();
 
 // controllers
 import {
@@ -8,10 +8,14 @@ import {
   getSingleReview,
   updateReview,
   deleteReview,
-} from '../controllers/reviewsController.js'
+} from '../controllers/reviewsController.js';
 
-router.route('/movie/:id').get(getReviews)
-router.route('/new').post(createReview)
-router.route('/:id').get(getSingleReview).put(updateReview).delete(deleteReview)
+router.route('/movie/:id').get(getReviews);
+router.route('/new').post(createReview);
+router
+  .route('/:id')
+  .get(getSingleReview)
+  .put(updateReview)
+  .delete(deleteReview);
 
-export default router
+export default router;

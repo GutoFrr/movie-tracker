@@ -19,9 +19,7 @@ app.use(express.json());
 
 app.use('/api/reviews', reviews);
 app.use('*', (req, res) =>
-  res.sendFile(
-    path.resolve(__dirname, '../client/dist', 'movie.html')
-  )
+  res.sendFile(path.resolve(__dirname, '../client/dist', 'movie.html'))
 );
 
 export default app;
