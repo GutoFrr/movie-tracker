@@ -59,7 +59,6 @@
 
   @media (max-width: 1440px) {
     .navbar {
-      grid-template-columns: repeat(4, 1fr);
       width: 1280px;
     }
   }
@@ -78,7 +77,6 @@
 
   @media (max-width: 960px) {
     .navbar {
-      grid-template-columns: repeat(2, 1fr);
       width: 768px;
     }
   }
@@ -90,11 +88,15 @@
   }
 
   @media (max-width: 640px) {
+    .navbar {
+      flex-direction: column;
+      gap: 8px;
+    }
+
     .search-form {
       width: 90vw;
     }
     .navbar {
-      grid-template-columns: repeat(1, 1fr);
       width: 90vw;
     }
   }
