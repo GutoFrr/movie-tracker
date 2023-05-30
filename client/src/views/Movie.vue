@@ -19,7 +19,7 @@
 
     <ul v-if="reviewStore.reviews.length > 0" class="reviews">
       <li v-for="item in reviewStore.reviews">
-        <Review :item="item" />
+        <Review :key="item.id" :item="item" />
       </li>
     </ul>
 

@@ -13,7 +13,7 @@
 <template>
   <ul v-if="searchStore.movies.length > 0" class="movies">
     <li v-for="item in (searchStore.movies as IMovie[])">
-      <Movie :title="item.title" :id="item.id" :posterPath="item.poster_path" />
+      <Movie :key="item.id" :title="item.title" :id="item.id" :posterPath="item.poster_path" />
     </li>
   </ul>
   <NotFound v-else />

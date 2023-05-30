@@ -14,7 +14,7 @@ import errorHandlerMiddleware from './middleware/errorHandler';
 import notFound from './middleware/notFound';
 
 app.use(express.json());
-app.use(cors({ origin: 'http://localhost:5173' }));
+app.use(cors());
 
 app.use('/api/reviews', reviewsRouter);
 

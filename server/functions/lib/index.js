@@ -12,7 +12,7 @@ const reviewsRouter_1 = require("./routes/reviewsRouter");
 const errorHandler_1 = require("./middleware/errorHandler");
 const notFound_1 = require("./middleware/notFound");
 app.use(express.json());
-app.use(cors({ origin: 'http://localhost:5173' }));
+app.use(cors());
 app.use('/api/reviews', reviewsRouter_1.default);
 app.use(errorHandler_1.default);
 app.use(notFound_1.default);
