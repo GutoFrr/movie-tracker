@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { reactive, ref } from 'vue';
-  import { deleteReview, editReview } from '../stores/reviews';
+  import { deleteReview, editReview, reviewStore } from '../stores/reviews';
   import FormRow from './FormRow.vue';
 
   interface Props {
@@ -27,21 +27,47 @@
     <p><strong>Avaliação: </strong>{{ review.review }}</p>
     <p><strong>Usuário: </strong>{{ review.user }}</p>
     <div class="review-btns">
-      <button class="edit-btn" type="button" @click="isEditing = true">Editar</button>
-      <button class="delete-btn" type="button" @click="() => deleteReview(item.id)">Deletar</button>
+      <button
+        class="edit-btn"
+        type="button"
+        @click="isEditing = true"
+        :disabled="reviewStore.loading"
+      >
+        Editar
+      </button>
+      <button
+        class="delete-btn"
+        type="button"
+        @click="() => deleteReview(item.id)"
+        :disabled="reviewStore.loading"
+      >
+        Deletar
+      </button>
     </div>
   </div>
   <form v-else-if="isEditing" class="review-card" @submit.prevent="handleSubmit">
     <FormRow type="text" name="review" labelText="Avaliação" v-model="review.review" />
     <FormRow type="text" name="user" labelText="Usuário" v-model="review.user" />
     <div class="review-btns">
-      <button class="edit-btn" type="submit">Enviar</button>
-      <button class="delete-btn" type="button" @click="isEditing = false">Cancelar</button>
+      <button class="edit-btn" type="submit" :disabled="reviewStore.loading">Enviar</button>
+      <button
+        class="delete-btn"
+        type="button"
+        @click="isEditing = false"
+        :disabled="reviewStore.loading"
+      >
+        Cancelar
+      </button>
     </div>
   </form>
 </template>
 
 <style scoped>
+  button:disabled {
+    cursor: default;
+    filter: saturate(50%);
+  }
+
   .review-card {
     display: flex;
     flex-direction: column;

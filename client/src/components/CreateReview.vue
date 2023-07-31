@@ -8,7 +8,7 @@
     <p>Nova Avaliação</p>
     <FormRow type="text" name="review" labelText="Avaliação" v-model="reviewStore.review" />
     <FormRow type="text" name="user" labelText="Usuário" v-model="reviewStore.user" />
-    <button class="submit-btn" type="submit">Enviar</button>
+    <button class="submit-btn" type="submit" :disabled="reviewStore.loading">Enviar</button>
   </form>
 </template>
 
@@ -36,5 +36,10 @@
     font-weight: 500;
     text-transform: uppercase;
     cursor: pointer;
+  }
+
+  .submit-btn:disabled {
+    cursor: default;
+    background-color: rgb(20, 68, 75)
   }
 </style>
